@@ -19,9 +19,7 @@ public class UserService {
     private final BCryptPasswordEncoder passwordEncoder;
     private final JwtTokenProvider jwtTokenProvider;
 
-    /**
-     * 회원가입
-     */
+   //회원가입
     public String registerUser(
             String userid,
             String username,
@@ -53,27 +51,21 @@ public class UserService {
         return "회원가입 성공!";
     }
 
-    /**
-     * 아이디 중복 확인
-     */
+    //아이디 중복확인
     public void checkUserIdDuplicate(String userid) {
         if (userRepository.existsByUserid(userid)) {
             throw new IllegalStateException("서버 오류: 이미 존재하는 사용자 아이디입니다.");
         }
     }
 
-    /**
-     * 이메일 중복 확인
-     */
+   //이메일 중복확인
     public void checkEmailDuplicate(String email) {
         if (userRepository.existsByEmail(email)) {
             throw new IllegalStateException("서버 오류: 이미 존재하는 이메일입니다.");
         }
     }
 
-    /**
-     * 로그인
-     */
+    //로그인
     public Map<String, String> loginUser(String userid, String password) {
         User user = userRepository.findByUserid(userid)
                 .orElseThrow(() -> new IllegalStateException("존재하지 않는 아이디입니다."));
