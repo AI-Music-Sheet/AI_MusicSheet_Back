@@ -20,9 +20,7 @@ public class UserController {
     private final UserService userService;
     private final UserRepository userRepository;
 
-    /**
-     * 1️⃣ 회원가입
-     */
+    //회원가입
     @PostMapping("/signup")
     public ResponseEntity<ApiResponse<String>> signup(@RequestBody SignUpRequest request) {
         userService.registerUser(
@@ -37,9 +35,7 @@ public class UserController {
         );
     }
 
-    /**
-     * 2️⃣ 아이디 중복 확인
-     */
+    //아이디 중복확인
     @GetMapping("/userid-signup-dup")
     public ResponseEntity<ApiResponse<Void>> checkUserIdDuplicate(
             @RequestParam("userid") String userid
@@ -50,9 +46,7 @@ public class UserController {
         );
     }
 
-    /**
-     * 3️⃣ 이메일 중복 확인
-     */
+    //이메일 중복확인
     @GetMapping("/email-signup-dup")
     public ResponseEntity<ApiResponse<Void>> checkEmailDuplicate(
             @RequestParam("email") String email
@@ -63,9 +57,7 @@ public class UserController {
         );
     }
 
-    /**
-     * 4️⃣ 로그인
-     */
+    //로그인
     @PostMapping("/login")
     public ResponseEntity<Map<String, String>> login(@RequestBody LoginRequest request) {
         Map<String, String> tokens = userService.loginUser(
@@ -75,9 +67,7 @@ public class UserController {
         return ResponseEntity.ok(tokens);
     }
 
-    /**
-     * 5️⃣ 토큰 재발급
-     */
+    //토큰 재발급
     @PostMapping("/refresh")
     public ResponseEntity<ApiResponse<Map<String, String>>> refresh(@RequestBody RefreshRequest request) {
         Map<String, String> tokens = userService.refreshAccessToken(request.getRefreshToken());
